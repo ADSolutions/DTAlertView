@@ -96,6 +96,10 @@ typedef void (^DTAlertViewTextDidChangeBlock)(DTAlertView *alertView, NSString *
  */
 @property (nonatomic, assign) DTAlertViewMode alertViewMode;
 
+@property (nonatomic, strong) NSString *positiveButtonTitle;
+
+@property (nonatomic, strong) NSString *cancelButtonTitle;
+
 /** Default is DTAlertViewAnimationDefault. 
  *
  * @brief The dismiss animetion, when button clicked.

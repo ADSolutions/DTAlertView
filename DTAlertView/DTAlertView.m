@@ -106,7 +106,7 @@ static DTBackgroundView *singletion = nil;
     
     [self setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.5f]];
     
-    previousKeyWindow = [[[UIApplication sharedApplication] keyWindow] retain];
+    previousKeyWindow = DTRetain([[UIApplication sharedApplication] keyWindow]);
     
     alertWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [alertWindow setWindowLevel:UIWindowLevelAlert];
@@ -208,9 +208,7 @@ const static CGFloat kMotionEffectExtent = 15.0f;
     UIColor *_progressTintColor;
     
     // Button Titles
-    NSString *_cancelButtonTitle;
     NSInteger _cancelButtonIndex;
-    NSString *_positiveButtonTitle;
     BOOL _positiveButtonEnable;
     NSString *_clickedButtonTitle;
     
@@ -501,8 +499,7 @@ const static CGFloat kMotionEffectExtent = 15.0f;
 {
     if (backgroundView == nil) {
         [self setBackgroundColor:kDefaultBGColor];
-        
-        DTRetain(_backgroundView);
+    
         _backgroundView = nil;
         
         return;
@@ -543,7 +540,7 @@ const static CGFloat kMotionEffectExtent = 15.0f;
     }
     
     if (_progressTintColor != nil) {
-        [_progressTintColor release];
+        DTRelease(_progressTintColor);
     }
     
     _progressTintColor = DTRetain(progressBarColor);
@@ -1318,7 +1315,7 @@ const static CGFloat kMotionEffectExtent = 15.0f;
     }
 
     if (_clickedButtonTitle != nil) {
-        [_clickedButtonTitle release];
+        DTRelease(_clickedButtonTitle);
     }
     
     _clickedButtonTitle = DTRetain([sender titleForState:UIControlStateNormal]);
@@ -1599,7 +1596,7 @@ const static CGFloat kMotionEffectExtent = 15.0f;
     NSArray *frameValues = @[transformScale(1.0f), transformScale(0.95f), transformScale(0.5f)];
     NSArray *frameTimes = @[@(0.0f), @(0.5f), @(1.0f)];
     
-    CAKeyframeAnimation *animation = [self animationWithValues:frameValues times:frameTimes duration:0.3f];
+    CAKeyframeAnimation *animation = [self animationWithValues:frameValues times:frameTimes duration:0.12f];
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
     
     return animation;
